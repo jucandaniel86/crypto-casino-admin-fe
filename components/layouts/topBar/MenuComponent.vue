@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { menuItems } from "@/app/utils";
+import { menuItems } from "@/app/menu";
 import { type MenuItemType } from "@/app/types";
 import { onMounted, ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";

@@ -63,6 +63,8 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           additionalData: '@import "@/assets/scss/_variables.scss";',
+          api: "modern",
+          silenceDeprecations: ["legacy-js-api"],
         },
       },
     },

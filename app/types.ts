@@ -15,13 +15,6 @@ export type MenuItemType = {
   prefix?: string;
   subMenu?: SubMenuItemType[];
 };
-
-export type BreadcrumbType = {
-  title: string;
-  disabled: boolean;
-  to?: string;
-};
-
 export type OptionType = {
   title: string;
   value: string;

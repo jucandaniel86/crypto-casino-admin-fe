@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 
-import { menuItems } from "@/app/utils";
+import { menuItems } from "@/app/menu";
 import { useRoute, useRouter } from "vue-router";
 import { useLayoutStore } from "@/store/app";
 

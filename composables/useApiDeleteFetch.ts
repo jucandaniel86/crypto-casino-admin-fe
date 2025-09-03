@@ -1,11 +1,4 @@
-import { useLog, useLogError } from "./useLog";
 import { useAuthStore } from "~/store/auth";
-
-export type useAPIFetchType = {
-  success: boolean;
-  error: any;
-  data: any;
-};
 
 export const useApiDeleteFetch = async (
   path: any,

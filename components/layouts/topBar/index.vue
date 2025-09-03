@@ -1,11 +1,10 @@
 <script lang="ts" setup>
- 
-import SiteMode from "@/components/layouts/topBar/SiteMode.vue";  
+import SiteMode from "@/components/layouts/topBar/SiteMode.vue";
 import Profile from "@/components/layouts/topBar/Profile.vue";
 import MenuComponents from "@/components/layouts/topBar/MenuComponent.vue";
 import MobileMenuComponent from "@/components/layouts/topBar/MobileMenuComponent.vue";
 
-import { useLayoutStore } from "@/store/app";
+import { useLayoutStore } from "~/store/app";
 import { SIDEBAR_SIZE, LAYOUTS, LAYOUT_POSITION } from "@/app/config";
 import { onMounted, onUnmounted, computed, ref } from "vue";
 
@@ -70,23 +69,9 @@ onUnmounted(() => {
       <div class="navbar-header">
         <div class="d-flex align-center">
           <div class="navbar-brand-box horizontal-logo">
-            <router-link to="/" class="logo logo-dark">
-              <span class="logo-sm">
-                <img src="@/assets/images/logo-sm.png" alt="" height="22" />
-              </span>
-              <span class="logo-lg">
-                <img src="@/assets/images/logo-dark.png" alt="" height="22" />
-              </span>
-            </router-link>
+            <router-link to="/" class="logo logo-dark"> </router-link>
 
-            <router-link to="/" class="logo logo-light">
-              <span class="logo-sm">
-                <img src="@/assets/images/logo-sm.png" alt="" height="22" />
-              </span>
-              <span class="logo-lg">
-                <img src="@/assets/images/logo-light.png" alt="" height="22" />
-              </span>
-            </router-link>
+            <router-link to="/" class="logo logo-light"> </router-link>
           </div>
           <v-app-bar-nav-icon
             variant="text"
@@ -104,11 +89,10 @@ onUnmounted(() => {
               </span>
             </div>
           </v-app-bar-nav-icon>
-       
         </div>
         <div class="d-flex align-center">
           <div class="dropdown topbar-head-dropdown ms-1 header-item">
-            <SiteMode /> 
+            <SiteMode />
             <Profile />
           </div>
         </div>

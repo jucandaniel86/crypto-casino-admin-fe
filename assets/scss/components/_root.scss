@@ -1,6 +1,4 @@
-//
-// root.scss
-//
+@use "sass:color";
 
 //theme-light
 :root {
@@ -55,7 +53,7 @@
   --#{$prefix}email-sidebar-bg: #{rgba($body-bg-dark, 5.5%)};
 
   // boxed
-  --#{$prefix}boxed-body-bg: #{darken($body-bg-dark, 1.5%)};
+  --#{$prefix}boxed-body-bg: #{color.adjust($body-bg-dark, $lightness: -1.5%)};
 
   //custom components styles
   .btn-light,

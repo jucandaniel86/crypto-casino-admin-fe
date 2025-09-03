@@ -427,7 +427,7 @@ $boxed-body-bg: var(--#{$prefix}boxed-body-bg);
 $timeline-color: var(--#{$prefix}border-color);
 
 //auth pages
-$auth-bg-cover: linear-gradient(to left, $primary, darken($primary, 10%));
+$auth-bg-cover: linear-gradient(to left, $primary, color.adjust($primary, $lightness: -10%));
 
 // Chat
 $chat-primary-bg: var(--#{$prefix}light);
@@ -663,8 +663,8 @@ $border-styles: (
 );
 
 $border-style: solid;
-$border-color: darken($gray-200, 5%);
-$border-color-translucent: darken($gray-200, 5%);
+$border-color:  color.scale($gray-200, $lightness: -5.2577319588%);
+$border-color-translucent: color.scale($gray-200, $lightness: -5.2577319588%);
 // scss-docs-end border-variables
 
 // scss-docs-start border-radius-variables

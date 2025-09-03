@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useTheme } from "vuetify";
-import { setAttributes } from "./app/utils";
+import { setAttributes } from "./app/menu";
 import { useLayoutStore } from "./store/app";
- 
+
 const state = useLayoutStore();
 const theme = useTheme();
 
@@ -18,7 +18,7 @@ onMounted(() => {
     topBarColor,
     sideBarSize,
     sideBarColor,
-    dir
+    dir,
   } = state;
   const initialThemeSetup: { [key: string]: string } = {
     ["data-layout"]: layoutType,
@@ -29,7 +29,7 @@ onMounted(() => {
     ["data-topbar"]: topBarColor,
     ["data-sidebar-size"]: sideBarSize,
     ["data-sidebar"]: sideBarColor,
-    ["dir"]: dir
+    ["dir"]: dir,
   };
 
   for (const key in initialThemeSetup) {
@@ -44,7 +44,7 @@ onMounted(() => {
       layoutTheme === "default" ? "defaultTheme" : layoutTheme;
   }
 
-  addScrollEventListener(); 
+  addScrollEventListener();
 });
 
 const addScrollEventListener = () => {
@@ -56,7 +56,7 @@ const addScrollEventListener = () => {
 const onScrollTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: "smooth"
+    behavior: "smooth",
   });
 };
 
@@ -65,10 +65,9 @@ onBeforeUnmount(() => {
     scrollTop.value = 0;
   });
 });
-
 </script>
 <template>
-	<NuxtLayout>
-		<NuxtPage />
-	</NuxtLayout>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

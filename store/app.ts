@@ -12,7 +12,7 @@ import {
   SIDEBAR_COLOR,
   DIR,
 } from "@/app/config";
-import { setAttributes } from "~/app/utils";
+import { setAttributes } from "~/app/menu";
 
 const { VERTICAL } = LAYOUTS;
 

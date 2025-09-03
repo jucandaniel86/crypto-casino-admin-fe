@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import { menuItems } from "@/app/utils";
+import { menuItems } from "@/app/menu";
 import { useLayoutStore } from "@/store/app";
 import { SIDEBAR_SIZE } from "@/app/config";
 import { useRoute, useRouter } from "vue-router";
@@ -49,18 +49,9 @@ const onClick = (path: string, isSingleLevel?: boolean) => {
 
 const USER_RIGHTS = {
   operator: ["HeaderMenu", "sideBarDashboard", "sideBarReports"],
-  admin: [
-    "HeaderMenu",
-    "sideBarDashboard",
-    "sideBarReports",
-    "sideBarInvoices",
-    "sideBarClients",
-    "sideBarUsers",
-    "sidebarCurrencies",
-    "sidebarGameResources",
-  ],
+  admin: [],
 };
-const USER_TYPE: UserTypeEnum = user?.user_type as any;
+const USER_TYPE = "admin";
 </script>
 <template>
   <v-container fluid class="py-0 px-3">
@@ -91,9 +82,7 @@ const USER_TYPE: UserTypeEnum = user?.user_type as any;
           </v-list-item>
           <v-list-item
             v-if="
-              !(menuItem.subMenu && menuItem.subMenu.length) &&
-              menuItem.link &&
-              USER_RIGHTS[USER_TYPE].indexOf(menuItem.id) !== -1
+              !(menuItem.subMenu && menuItem.subMenu.length) && menuItem.link
             "
             :data-key="`t-${menuItem.label}`"
             append-icon=""
