@@ -1,0 +1,373 @@
+import type { ReportHeadersData } from "../Types";
+
+export const SUMMARY_REPORT_HEADERS: ReportHeadersData[] = [
+  {
+    title: "Client ID - ClientName ",
+    align: "start",
+    sortable: false,
+    value: "site_id",
+  },
+  {
+    title: "Brands",
+    align: "start",
+    sortable: false,
+    value: "total_brands",
+  },
+  {
+    title: "Total wagered (€)",
+    align: "start",
+    sortable: false,
+    value: "total_bets",
+  },
+  {
+    title: "Total payouts (€)",
+    align: "start",
+    sortable: false,
+    value: "total_wins",
+  },
+  {
+    title: "Total refounds (€)",
+    align: "start",
+    sortable: false,
+    value: "total_refunds",
+  },
+  {
+    title: "GGR (€)",
+    align: "start",
+    sortable: false,
+    value: "ggr",
+  },
+  {
+    title: "Bonus wagered (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_bets",
+  },
+  {
+    title: "Bonus payouts (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_wins",
+  },
+  {
+    title: "Bonus GGR (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_ggr",
+  },
+  {
+    title: "RTP",
+    align: "start",
+    sortable: false,
+    value: "rtp",
+  },
+  {
+    title: "AVG Bets (€)",
+    align: "start",
+    sortable: false,
+    value: "avg_bets",
+  },
+  {
+    title: "Players",
+    align: "start",
+    sortable: false,
+    value: "total_players",
+  },
+  {
+    title: "Games",
+    align: "start",
+    sortable: false,
+    value: "total_games",
+  },
+  {
+    title: "Sessions",
+    align: "start",
+    sortable: false,
+    value: "total_sessions",
+  },
+  {
+    title: "Total Spins",
+    align: "start",
+    sortable: false,
+    value: "total_spins",
+  },
+];
+
+export const BRANDS_REPORT_HEADERS: ReportHeadersData[] = [
+  {
+    title: "Brand Name",
+    align: "start",
+    sortable: false,
+    value: "brand_id",
+  },
+  {
+    title: "Total wagered (€)",
+    align: "start",
+    sortable: false,
+    value: "total_bets",
+  },
+  {
+    title: "Total payouts (€)",
+    align: "start",
+    sortable: false,
+    value: "total_wins",
+  },
+  {
+    title: "Total Refunds (€)",
+    align: "start",
+    sortable: false,
+    value: "total_refunds",
+  },
+  {
+    title: "GGR (€)",
+    align: "start",
+    sortable: false,
+    value: "ggr",
+  },
+  {
+    title: "Bonus bets (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_bets",
+  },
+  {
+    title: "Bonus wins (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_wins",
+  },
+  {
+    title: "Bonus GGR (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_ggr",
+  },
+  {
+    title: "RTP",
+    align: "start",
+    sortable: false,
+    value: "rtp",
+  },
+  {
+    title: "AVG Bets (€)",
+    align: "start",
+    sortable: false,
+    value: "avg_bets",
+  },
+  {
+    title: "Players",
+    align: "start",
+    sortable: false,
+    value: "total_players",
+  },
+  {
+    title: "Games",
+    align: "start",
+    sortable: false,
+    value: "total_games",
+  },
+  {
+    title: "Sessions",
+    align: "start",
+    sortable: false,
+    value: "total_sessions",
+  },
+  {
+    title: "Total Spins",
+    align: "start",
+    sortable: false,
+    value: "total_spins",
+  },
+];
+
+export const GAMES_REPORT_HEADERS: ReportHeadersData[] = [
+  {
+    title: "Game ID",
+    align: "start",
+    sortable: false,
+    value: "game_id",
+  },
+  {
+    title: "Game Title",
+    align: "start",
+    sortable: false,
+    value: "game_name",
+  },
+  {
+    title: "Operator",
+    align: "start",
+    sortable: false,
+    value: "site_id",
+  },
+  {
+    title: "Brands",
+    align: "start",
+    sortable: false,
+    value: "total_brands",
+  },
+  {
+    title: "Total wagered (€)",
+    align: "start",
+    sortable: false,
+    value: "total_bets",
+  },
+  {
+    title: "Total payouts (€)",
+    align: "start",
+    sortable: false,
+    value: "total_wins",
+  },
+  {
+    title: "Total Refunds (€)",
+    align: "start",
+    sortable: false,
+    value: "total_refunds",
+  },
+  {
+    title: "GGR (€)",
+    align: "start",
+    sortable: false,
+    value: "ggr",
+  },
+  {
+    title: "Bonus bets (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_bets",
+  },
+  {
+    title: "Bonus wins (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_wins",
+  },
+  {
+    title: "Bonus GGR (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_ggr",
+  },
+  {
+    title: "RTP",
+    align: "start",
+    sortable: false,
+    value: "rtp",
+  },
+  {
+    title: "AVG Bets (€)",
+    align: "start",
+    sortable: false,
+    value: "avg_bets",
+  },
+  {
+    title: "Players",
+    align: "start",
+    sortable: false,
+    value: "total_players",
+  },
+  {
+    title: "Sessions",
+    align: "start",
+    sortable: false,
+    value: "total_sessions",
+  },
+  {
+    title: "Total Spins",
+    align: "start",
+    sortable: false,
+    value: "total_spins",
+  },
+];
+
+export const PLAYERS_REPORT_HEADERS: ReportHeadersData[] = [
+  {
+    title: "Player ID",
+    align: "start",
+    sortable: false,
+    value: "operator_player_id",
+  },
+  {
+    title: "Client Name",
+    align: "start",
+    sortable: false,
+    value: "client_name",
+  },
+  {
+    title: "Brand",
+    align: "start",
+    sortable: false,
+    value: "brand",
+  },
+  {
+    title: "Total wagered (€)",
+    align: "start",
+    sortable: false,
+    value: "total_bets",
+  },
+  {
+    title: "Total payouts (€)",
+    align: "start",
+    sortable: false,
+    value: "total_wins",
+  },
+  {
+    title: "Total Refunds (€)",
+    align: "start",
+    sortable: false,
+    value: "total_refunds",
+  },
+  {
+    title: "GGR (€)",
+    align: "start",
+    sortable: false,
+    value: "ggr",
+  },
+  {
+    title: "Bonus bets (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_bets",
+  },
+  {
+    title: "Bonus wins (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_wins",
+  },
+  {
+    title: "Bonus GGR (€)",
+    align: "start",
+    sortable: false,
+    value: "bonus_ggr",
+  },
+  {
+    title: "Games",
+    align: "start",
+    sortable: false,
+    value: "total_games",
+  },
+  {
+    title: "Studios",
+    align: "start",
+    sortable: false,
+    value: "total_studios",
+  },
+  {
+    title: "Sessions",
+    align: "start",
+    sortable: false,
+    value: "total_sessions",
+  },
+  {
+    title: "Spins",
+    align: "start",
+    sortable: false,
+    value: "total_spins",
+  },
+  {
+    title: "LTV",
+    align: "start",
+    sortable: false,
+    value: "ltv",
+  },
+];
