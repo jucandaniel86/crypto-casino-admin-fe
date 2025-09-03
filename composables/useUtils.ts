@@ -8,7 +8,16 @@ export const useUtils = () => {
     }, []);
   };
 
+  function findRecursive(search: string, key: string, arr: any[]) {
+    return arr.reduce((a, item) => {
+      if (a) return a;
+      if (item[key] === search) return item;
+      if (item.children) return findRecursive(search, key, item.children);
+    }, null);
+  }
+
   return {
     removeDuplicates,
+    findRecursive,
   };
 };
