@@ -9,7 +9,8 @@ export type useApiFetchType = {
 
 export const useApiPostFetch = async (
   path: any,
-  _payload: any = {}
+  _payload: any = {},
+  files: boolean = false
 ): Promise<useApiFetchType> => {
   const config = useRuntimeConfig();
   const { token } = storeToRefs(useAuthStore());
@@ -21,14 +22,15 @@ export const useApiPostFetch = async (
   };
 
   options.baseURL = config.public.baseURL;
-  options.body = { ..._payload };
+  options.body = _payload;
   options.method = "post";
   options.watch = false;
+  options.server = false;
 
   //@ts-ignore
   options.onRequest = ({ request, options }) => {
     options.headers.set("Authorization", `Bearer ${token.value}`);
-    options.headers.set("content-type", "application/json");
+    options.headers.set("Accept", "application/json");
   };
 
   useLog(

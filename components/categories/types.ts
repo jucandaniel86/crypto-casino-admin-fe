@@ -10,5 +10,5 @@ export type CategoryType = {
   seo: any;
   slug: string;
   restricted: boolean;
-  children: CategoryType[];
+  descendants: CategoryType[];
 };

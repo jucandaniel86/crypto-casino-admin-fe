@@ -12,7 +12,7 @@ const props = defineProps<CategoryItemT>();
 const currentLevel = props.level + 1;
 
 //emitters
-const emitters = defineEmits(["onEdit", "onDelete"]);
+const emitters = defineEmits(["onAdd", "onEdit", "onDelete"]);
 
 //methods
 const handleEdit = () => emitters("onEdit", props.item);
@@ -35,12 +35,13 @@ const handleDelete = () => emitters("onDelete", props.item);
       </div>
     </td>
   </tr>
-
   <ListItem
-    v-for="child in item.children"
+    v-for="child in item.descendants"
     :key="child.id"
     :item="child"
     :level="currentLevel"
     :has-actions="props.hasActions"
+    @onDelete="handleDelete"
+    @onEdit="handleEdit"
   />
 </template>

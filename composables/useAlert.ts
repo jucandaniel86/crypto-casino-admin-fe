@@ -45,7 +45,7 @@ export const useAlert = () => {
     });
   };
 
-  const axiosErrorAlert = (_data: any) => {
+  const axiosErrorAlert = (_data: any, toast: boolean = false) => {
     let message = "";
     if (typeof _data.response === "undefined") {
       return alertError("Something went wrong!");
@@ -73,6 +73,11 @@ export const useAlert = () => {
       default:
         message = _data.response.data.error;
     }
+
+    if (toast) {
+      return useNuxtApp().$toast.error(message);
+    }
+
     alertError(message);
   };
 
@@ -100,12 +105,22 @@ export const useAlert = () => {
     fn.$swal.fire("Warning!!", message, "warning");
   };
 
+  const toastSuccess = (message: string) => {
+    return useNuxtApp().$toast.success(message);
+  };
+
+  const toastError = (message: string) => {
+    return useNuxtApp().$toast.error(message);
+  };
+
   return {
     confirmDelete,
     alertSuccess,
     alertError,
     alertWarning,
     axiosErrorAlert,
+    toastSuccess,
+    toastError,
     confirm,
   };
 };

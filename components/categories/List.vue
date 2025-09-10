@@ -5,12 +5,14 @@ type CategoryListT = {
   hasSearch?: boolean;
   viewType: CategoryViewType;
   loading?: boolean;
-  items: CategoryType[];
+  items: CategoryType[] | undefined;
+  multiselect?: boolean;
 };
 //props
 const props = withDefaults(defineProps<CategoryListT>(), {
   hasSearch: true,
   loading: false,
+  multiselect: false,
 });
 
 //composables
@@ -21,29 +23,19 @@ const search = ref("");
 const selected = ref<CategoryType>();
 
 //emitters
-const emitters = defineEmits(["onSelect", "onEdit", "onDelete", "onAdd"]);
-
-//computed
-const displayList = computed(() => {
-  return search.value.length > 1
-    ? findRecursive(search.value, "name", props.items)
-    : props.items;
-});
+const emitters = defineEmits(["onEdit", "onDelete", "onAdd", "onSearch"]);
 
 //methods
 const handleEdit = (_category: CategoryType) => emitters("onEdit", _category);
 const handleDelete = (_category: CategoryType) =>
   emitters("onDelete", _category.id);
 const handleAdd = (_category?: CategoryType) => {
-  if (_category) return emitters("onAdd", { parent: _category });
   return emitters("onAdd");
 };
-const handleSelect = (_category: CategoryType) => {
-  selected.value = _category;
-  emitters("onSelect", _category);
-};
 
-console.log("display list", displayList.value);
+watch(search, () => {
+  emitters("onSearch", search.value);
+});
 </script>
 <template>
   <v-card>
@@ -83,13 +75,14 @@ console.log("display list", displayList.value);
         </thead>
         <tbody>
           <CategoriesItem
-            v-for="(category, i) in displayList"
+            v-for="(category, i) in props.items"
             :key="category.id"
             :item="category"
             :level="0"
             :has-actions="props.viewType === CategoryViewType.EDITABLE"
             @onEdit="handleEdit"
             @onDelete="handleDelete"
+            @onAdd="handleAdd"
           />
         </tbody>
       </v-table>

@@ -9,11 +9,12 @@ export const useUtils = () => {
   };
 
   function findRecursive(search: string, key: string, arr: any[]) {
-    return arr.reduce((a, item) => {
-      if (a) return a;
-      if (item[key] === search) return item;
-      if (item.children) return findRecursive(search, key, item.children);
-    }, null);
+    return arr.filter(function f(o) {
+      return (
+        o[key].includes(search) ||
+        (o.children && (o.children = o.children.filter(f)).length)
+      );
+    });
   }
 
   return {
