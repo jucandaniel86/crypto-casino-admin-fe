@@ -23,6 +23,7 @@
     "nuxt": "^3.13.0",
     "pinia": "^2.2.4",
     "pinia-plugin-persistedstate": "^4.1.1",
+    "quill-table-better": "^1.2.3",
     "simplebar": "^6.2.7",
     "sweetalert2": "^11.14.4",
     "v-md-date-range-picker": "^2.6.0",
@@ -38,5 +39,5 @@
     "vite-plugin-vuetify": "^2.0.4",
     "vuetify": "^3.7.2"
   },
-  "version": "1.0.2"
+  "version": "1.0.3"
 }

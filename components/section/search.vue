@@ -14,15 +14,76 @@ const form = ref({
   widthPercent: "",
 });
 
+const resolutionConfig = ref({
+  LG: {
+    widthPercent: 0,
+    itemsPerRow: 0,
+  },
+  XL: {
+    widthPercent: 0,
+    itemsPerRow: 0,
+  },
+  MD: {
+    widthPercent: 0,
+    itemsPerRow: 0,
+  },
+  SM: {
+    widthPercent: 0,
+    itemsPerRow: 0,
+  },
+  XS: {
+    widthPercent: 0,
+    itemsPerRow: 0,
+  },
+});
+
 const emits = defineEmits(["onUpdate"]);
 
 watch(
   form,
   () => {
-    emits("onUpdate", form.value);
+    emits("onUpdate", {
+      resolutionConfig: resolutionConfig.value,
+      focusWidthPercent: form.value.focusWidthPercent,
+      iconColor: form.value.iconColor,
+      textColor: form.value.textColor,
+      widthPercent: form.value.widthPercent,
+    });
   },
   { deep: true }
 );
+
+watch(
+  resolutionConfig,
+  () => {
+    emits("onUpdate", {
+      resolutionConfig: resolutionConfig.value,
+      focusWidthPercent: form.value.focusWidthPercent,
+      iconColor: form.value.iconColor,
+      textColor: form.value.textColor,
+      widthPercent: form.value.widthPercent,
+    });
+  },
+  { deep: true }
+);
+
+onMounted(() => {
+  if (typeof props.item.data?.resolutionConfig !== "undefined") {
+    resolutionConfig.value = { ...props.item.data.resolutionConfig };
+  }
+  if (props.item.data?.focusWidthPercent) {
+    form.value.focusWidthPercent = props.item.data.focusWidthPercent;
+  }
+  if (props.item.data?.iconColor) {
+    form.value.iconColor = props.item.data.iconColor;
+  }
+  if (props.item.data?.textColor) {
+    form.value.textColor = props.item.data.textColor;
+  }
+  if (props.item.data?.widthPercent) {
+    form.value.widthPercent = props.item.data.widthPercent;
+  }
+});
 </script>
 <template>
   <v-row>
@@ -56,40 +117,70 @@ watch(
     <v-col cols="6">
       <SharedResolutionConfig>
         <template #XL>
-          <v-text-field label="Items per row" hide-details density="compact" />
           <v-text-field
+            v-model="resolutionConfig.XL.itemsPerRow"
+            label="Items per row"
+            hide-details
+            density="compact"
+          />
+          <v-text-field
+            v-model="resolutionConfig.XL.widthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
           />
         </template>
         <template #LG>
-          <v-text-field label="Items per row" hide-details density="compact" />
           <v-text-field
+            v-model="resolutionConfig.LG.itemsPerRow"
+            label="Items per row"
+            hide-details
+            density="compact"
+          />
+          <v-text-field
+            v-model="resolutionConfig.LG.widthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
           />
         </template>
         <template #MD>
-          <v-text-field label="Items per row" hide-details density="compact" />
           <v-text-field
+            v-model="resolutionConfig.MD.itemsPerRow"
+            label="Items per row"
+            hide-details
+            density="compact"
+          />
+          <v-text-field
+            v-model="resolutionConfig.MD.widthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
           />
         </template>
         <template #SM>
-          <v-text-field label="Items per row" hide-details density="compact" />
           <v-text-field
+            v-model="resolutionConfig.SM.itemsPerRow"
+            label="Items per row"
+            hide-details
+            density="compact"
+          />
+          <v-text-field
+            v-model="resolutionConfig.SM.widthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
           />
         </template>
         <template #XS>
-          <v-text-field label="Items per row" hide-details density="compact" />
           <v-text-field
+            v-model="resolutionConfig.XS.itemsPerRow"
+            label="Items per row"
+            hide-details
+            density="compact"
+          />
+          <v-text-field
+            v-model="resolutionConfig.XS.widthPercent"
             label="Panel width percent"
             hide-details
             density="compact"

@@ -72,6 +72,11 @@ const selectAndClose = () => {
   dialog.value = false;
 };
 
+const unSelect = () => {
+  model.value = "";
+  selectedIcon.value = "";
+};
+
 //watchers
 watch(
   props,
@@ -198,7 +203,7 @@ onMounted(() => {
             variant="flat"
             color="blue"
             prepend-icon="mdi-form-select"
-            @click.prevent="selectedIcon = ''"
+            @click.prevent="unSelect"
             >Unselect</v-btn
           >
         </div>

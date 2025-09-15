@@ -1,13 +1,12 @@
 import type { VDataTableHeaders } from "~/core/types/App";
 
-export const CASINO_PROVIDERS_TABLE_HEADERS: any[] = [
+export const CASINO_TAGS_TABLE: any[] = [
   {
     title: "Name",
     align: "start",
     sortable: false,
     value: "name",
-    width: "90%",
+    width: "80%",
   },
-
-  { title: "Actions", value: "iron", width: "10%" },
+  { title: "Actions", value: "iron", width: "20%" },
 ];

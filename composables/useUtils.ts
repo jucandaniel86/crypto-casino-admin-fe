@@ -17,8 +17,16 @@ export const useUtils = () => {
     });
   }
 
+  function flatten(destArray: any[], nodeList: any[]) {
+    nodeList.forEach((node) => {
+      destArray.push(node);
+      flatten(destArray, node.descendants || []);
+    });
+  }
+
   return {
     removeDuplicates,
     findRecursive,
+    flatten,
   };
 };

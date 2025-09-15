@@ -40,7 +40,7 @@ const onEdit = (payload: CategoryType) => {
 
 const handleSave = async (payload: any) => {
   saveLoading.value = true;
-
+  console.log("payload", payload);
   const { data, error } = await useApiPostFetch("/categories/save", payload);
 
   if (error) {

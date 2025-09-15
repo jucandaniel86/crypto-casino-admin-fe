@@ -4,9 +4,12 @@ import { APP_SECTIONS, type ContainerType } from "./setup";
 type SectionT = {
   loading?: boolean;
   sections: ContainerType[];
+  pageId: number | string | string[];
+  isTag: boolean;
 };
 const props = withDefaults(defineProps<SectionT>(), {
   loading: false,
+  isTag: false,
 });
 
 const SectionContainerRef = ref("SectionContainerRef");
@@ -67,6 +70,38 @@ const save = async (payload: any): Promise<void> => {
   }
   componentSaved.value = null;
 };
+
+const moveItem = (from: number, to: number) => {
+  // remove `from` item and store it
+  let lSections = [...props.sections];
+  var f = lSections.splice(from, 1)[0];
+  // insert stored item into position `to`
+  lSections.splice(to, 0, f);
+
+  return lSections.map((el, i) => ({ id: el.id, pageOrder: i }));
+};
+
+const changeOrder = async (payload: any): Promise<void> => {
+  componentSaved.value = payload.page_id;
+
+  const order = moveItem(payload.from, payload.to);
+
+  const { data, success, error } = await useApiPostFetch(
+    "/sections/change-order",
+    {
+      order,
+      page_id: props.pageId,
+      tag: props.isTag,
+    }
+  );
+  if (success) {
+    useNuxtApp().$toast.success(data.message);
+    emits("reloadList");
+  } else {
+    useNuxtApp().$toast.error("Something went wrong");
+  }
+  componentSaved.value = null;
+};
 </script>
 <template>
   <v-card
@@ -113,13 +148,17 @@ const save = async (payload: any): Promise<void> => {
         height="500"
         ref="SectionContainerRef"
       >
-        <template v-slot:default="{ item }">
+        <template v-slot:default="{ item, index }">
           <SectionContainer
             :key="item.id"
             :item="item"
+            :page-order="index"
             :loading="componentSaved === item.id"
+            :has-decrese-order="index > 0"
+            :has-increase-order="index + 1 < props.sections.length"
             @on-delete="deleteItem"
             @on-save="save"
+            @on-order-changed="changeOrder"
           />
         </template>
       </v-virtual-scroll>

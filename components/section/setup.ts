@@ -64,8 +64,16 @@ export const APP_SECTIONS: SelectedSectionsT[] = [
     container: ContainerSection.SLIDER,
   },
   {
+    label: "Tabs Container",
+    container: ContainerSection.TABS,
+  },
+  {
     label: "Games Category Container",
     container: ContainerSection.GAMES_CATEGORY,
+  },
+  {
+    label: "Games Container",
+    container: ContainerSection.CATEGORY_HEADLESS,
   },
   {
     label: "HTML Container",
@@ -86,10 +94,6 @@ export const APP_SECTIONS: SelectedSectionsT[] = [
   {
     label: "Provider Carousel Container",
     container: ContainerSection.PROVIDER_LOGOS,
-  },
-  {
-    label: "Games Container",
-    container: ContainerSection.CATEGORY_HEADLESS,
   },
   {
     label: "Bet Feed Container",

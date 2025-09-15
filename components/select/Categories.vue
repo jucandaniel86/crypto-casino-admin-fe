@@ -9,6 +9,9 @@ const props = withDefaults(defineProps<SelectCategoriesT>(), {
   multiple: true,
 });
 
+//composables
+const { flatten } = useUtils();
+
 //models
 const dialog = ref(false);
 const items = ref<CategoryType[]>([]);
@@ -31,10 +34,9 @@ const filter = (value: any, search: string, item: any) => {
 };
 
 const selectedItems = computed(() => {
-  return [
-    ...items.value.flatMap((el) => ({ id: el.id, name: el.name })),
-    ...items.value.flatMap((el) => el.descendants),
-  ].filter((item) => model.value?.indexOf(item.id as any) !== -1);
+  let desc: any[] = [];
+  flatten(desc, items.value);
+  return desc.filter((item) => model.value?.indexOf(item.id as any) !== -1);
 });
 
 //onMounted

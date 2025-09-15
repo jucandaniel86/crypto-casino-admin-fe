@@ -10,6 +10,7 @@ useHead({
 const sections = ref<any>([]);
 const loading = ref<boolean>(false);
 const route = useRoute();
+const pageID = route.params.id;
 
 //methods
 const addNew = async (payload: any): Promise<void> => {
@@ -51,7 +52,13 @@ onMounted(() => {
 
   <v-row no-gutters>
     <v-col cols="9">
-      <Section :sections="sections" @onAddNew="addNew" @reload-list="getPage" />
+      <Section
+        :page-id="pageID"
+        :sections="sections"
+        @onAddNew="addNew"
+        @reload-list="getPage"
+        :is-tag="false"
+      />
     </v-col>
     <v-col cols="3"> PAGE OPTIONS </v-col>
   </v-row>

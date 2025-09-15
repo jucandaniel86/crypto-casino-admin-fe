@@ -135,4 +135,25 @@ export const APP_BREADCRUMBS: BreadcrumbsInterface = {
       disabled: true,
     },
   ],
+
+  TAG_SAVE: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Casino",
+      disabled: true,
+    },
+    {
+      title: "Tags",
+      disabled: false,
+      to: "/casino/tags",
+    },
+    {
+      title: "Save Tag",
+      disabled: true,
+    },
+  ],
 };

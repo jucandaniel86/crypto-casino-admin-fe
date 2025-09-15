@@ -9,11 +9,11 @@ const form = ref({
 });
 
 //emitters
-const emitters = defineEmits(["pages:close-modal", "pages:save"]);
-const save = () => emitters("pages:save", form.value);
+const emitters = defineEmits(["tags:close-modal", "tags:save"]);
+const save = () => emitters("tags:save", form.value);
 </script>
 <template>
-  <v-card title="Save Page">
+  <v-card title="Save TAG">
     <v-card-text>
       <v-text-field
         v-model="form.name"
@@ -33,7 +33,7 @@ const save = () => emitters("pages:save", form.value);
         >Save</v-btn
       >
       <v-btn
-        @click="emitters('pages:close-modal')"
+        @click="emitters('tags:close-modal')"
         color="red"
         density="compact"
         variant="flat"

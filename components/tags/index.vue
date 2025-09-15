@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CASINO_PROVIDERS_TABLE_HEADERS } from "./headers";
+import { CASINO_TAGS_TABLE } from "./headers";
 
 //composables
 const { confirmDelete, alertSuccess, axiosErrorAlert } = useAlert();
@@ -18,7 +18,7 @@ const reloadList = async () => {
   loading.value = true;
   const { page, itemsPerPage } = options.value;
 
-  const { success, data } = await useAPIFetch("/pages/list", {
+  const { success, data } = await useAPIFetch("/tags/list", {
     start: page,
     length: itemsPerPage,
     search: searchText.value,
@@ -32,7 +32,7 @@ const reloadList = async () => {
 };
 const deleteItem = async (id: number) => {
   confirmDelete(async (_result: any) => {
-    const { data, success, error } = await useApiDeleteFetch("/pages/delete", {
+    const { data, success, error } = await useApiDeleteFetch("/tags/delete", {
       id,
     });
     if (success) {
@@ -53,16 +53,13 @@ const wait = (duration: number) => {
 };
 
 const save = async (payload: any) => {
-  const { success, data, error } = await useApiPostFetch(
-    `/pages/save`,
-    payload
-  );
+  const { success, data, error } = await useApiPostFetch(`/tags/save`, payload);
 
   if (success) {
     useNuxtApp().$toast.success(data.message);
 
     await wait(600);
-    router.push({ name: "casino-pages-edit-id", params: { id: data.data.id } });
+    router.push({ name: "casino-tags-edit-id", params: { id: data.data.id } });
     return;
   }
 
@@ -74,7 +71,7 @@ const save = async (payload: any) => {
 const add = () => (dialog.value = true);
 
 const edit = (item: any) =>
-  router.push({ name: "casino-pages-edit-id", params: { id: item.id } });
+  router.push({ name: "casino-tags-edit-id", params: { id: item.id } });
 
 //watchers
 watch(
@@ -109,12 +106,12 @@ onMounted(() => {
       ></v-text-field>
       <v-btn value="nearby" @click.prevent="add" flat color="blue">
         <v-icon>mdi-plus</v-icon>
-        <span>Add new page</span>
+        <span>Add new tag</span>
       </v-btn>
     </v-card-title>
     <v-card-text>
       <v-data-table
-        :headers="CASINO_PROVIDERS_TABLE_HEADERS"
+        :headers="CASINO_TAGS_TABLE"
         :items="items"
         :options.sync="options"
         :server-items-length="totalItems"
@@ -123,12 +120,10 @@ onMounted(() => {
         class="elevation-1"
         :height="400"
         density="compact"
-        fixed-header
       >
         <template v-slot:item="{ item }">
           <tr>
             <td>{{ item.name }}</td>
-
             <td>
               <v-btn density="compact" :icon="true" @click.prevent="edit(item)"
                 ><v-icon>mdi-pencil</v-icon></v-btn
@@ -145,7 +140,7 @@ onMounted(() => {
       </v-data-table>
     </v-card-text>
     <v-dialog v-model="dialog" max-width="500">
-      <PagesForm @pages:close-modal="dialog = false" @pages:save="save" />
+      <TagsForm @tags:close-modal="dialog = false" @tags:save="save" />
     </v-dialog>
   </v-card>
 </template>
