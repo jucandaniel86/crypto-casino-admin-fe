@@ -70,7 +70,6 @@ onMounted(() => {
 </script>
 <template>
   <v-col class="text-center">
-    <PageHeader title="Players" />
     <v-card min-height="600">
       <v-card-title class="d-flex justify-space-between">
         <h3 class="text-h6">Player Activity</h3>
