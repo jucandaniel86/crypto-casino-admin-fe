@@ -8,6 +8,7 @@ import type { PageType } from "~/core/types/Page";
 type ActionButtonComponentType = {
   label: string;
   color?: string;
+  defaultOptions?: any;
 };
 
 const props = withDefaults(defineProps<ActionButtonComponentType>(), {
@@ -21,16 +22,18 @@ const model = ref<ActionButtonType>({
     type: ButtonActionTypesEnum.OPEN_INTERNAL_PAGE,
     slug: "",
     url: "",
+    overlay: "",
     noFollow: false,
     isSameTab: false,
   },
-  color: props.color,
+  color: "primary",
   title: "",
 });
-const menu = ref<boolean>(false);
+const menuOpen = ref<boolean>(false);
 const ACTION_TYPES = [
   { id: ButtonActionTypesEnum.OPEN_INTERNAL_PAGE, label: "Open Internal Page" },
   { id: ButtonActionTypesEnum.OPEN_EXTERNAL_PAGE, label: "Open External Page" },
+  { id: ButtonActionTypesEnum.OPEN_OVERLAY, label: "Open Overlay" },
 ];
 const availableColors = [
   "primary",
@@ -42,7 +45,15 @@ const availableColors = [
   "pink",
   "black",
 ];
+const availableOverlays = [
+  { id: "wallet", label: "Wallet" },
+  { id: "login", label: "Login" },
+  { id: "register", label: "Register" },
+];
 const { label } = props;
+
+//emits
+const emits = defineEmits(["model:update"]);
 
 //methods
 const getPages = async (): Promise<void> => {
@@ -51,12 +62,26 @@ const getPages = async (): Promise<void> => {
 };
 
 //mounted
-onMounted(() => {
-  getPages();
+onMounted(async () => {
+  await getPages();
+  if (props.defaultOptions) {
+    model.value = {
+      ...model.value,
+      ...props.defaultOptions,
+    };
+  }
 });
+
+watch(
+  model,
+  () => {
+    emits("model:update", model.value);
+  },
+  { deep: true }
+);
 </script>
 <template>
-  <v-menu v-model="menu" :close-on-content-click="false">
+  <v-menu v-model="menuOpen" :close-on-content-click="false">
     <template #activator="{ props }">
       <div class="d-flex flex-column" style="max-width: 200px">
         <label v-if="label">{{ label }}</label>
@@ -65,7 +90,7 @@ onMounted(() => {
         }}</v-btn>
       </div>
     </template>
-    <v-card width="500">
+    <v-card width="500" v-if="menuOpen">
       <v-card-text>
         <v-text-field
           v-model="model.title"
@@ -101,6 +126,17 @@ onMounted(() => {
           density="compact"
         />
 
+        <v-select
+          v-if="model.action.type === ButtonActionTypesEnum.OPEN_OVERLAY"
+          v-model="model.action.overlay"
+          label="Overlay"
+          :items="availableOverlays"
+          item-title="label"
+          item-value="id"
+          hide-details
+          density="compact"
+        />
+
         <div
           class="d-flex w-100 flex-column"
           v-if="model.action.type === ButtonActionTypesEnum.OPEN_EXTERNAL_PAGE"
@@ -131,7 +167,7 @@ onMounted(() => {
             density="compact"
             color="primary"
             flat
-            @click.prevent="menu = false"
+            @click.prevent="menuOpen = false"
             >Save</v-btn
           >
         </div>

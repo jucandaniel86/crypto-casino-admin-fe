@@ -16,7 +16,9 @@ const form = ref({
   name: "",
   icon: "",
   id: 0,
+  page_id: 0,
 });
+const pages = ref<any[]>([]);
 
 //methods
 const addNew = async (payload: any): Promise<void> => {
@@ -37,7 +39,7 @@ const addNew = async (payload: any): Promise<void> => {
   loading.value = false;
 };
 
-const getPage = async (): Promise<void> => {
+const getTag = async (): Promise<void> => {
   loading.value = true;
   const { data } = await useAPIFetch("/tags/get", {
     id: route.params.id,
@@ -47,6 +49,7 @@ const getPage = async (): Promise<void> => {
     form.value.name = data.data.name;
     form.value.icon = data.data.icon;
     form.value.id = data.data.id;
+    form.value.page_id = data.data.page_id;
   }
   loading.value = false;
 };
@@ -65,9 +68,17 @@ const save = async (): Promise<void> => {
   saving.value = false;
 };
 
+const getPages = async (): Promise<void> => {
+  const { data } = await useAPIFetch("/pages/list");
+  if (data) {
+    pages.value = data.data;
+  }
+};
+
 //mounted
 onMounted(() => {
-  getPage();
+  getTag();
+  getPages();
 });
 </script>
 <template>
@@ -79,22 +90,30 @@ onMounted(() => {
         :page-id="pageID"
         :sections="sections"
         @onAddNew="addNew"
-        @reload-list="getPage"
+        @reload-list="getTag"
         :is-tag="true"
       />
     </v-col>
     <v-col cols="3">
       <v-card density="compact">
         <v-card-title>Tag Options</v-card-title>
-        <v-card-text>
-          <v-text-field
-            v-model="form.name"
-            hide-details
-            density="compact"
-            label="Name"
-          />
-          <SharedIcons v-model="form.icon" :icon="form.icon" />
-        </v-card-text>
+
+        <v-text-field
+          v-model="form.name"
+          hide-details
+          density="compact"
+          label="Name"
+        />
+        <SharedIcons v-model="form.icon" :icon="form.icon" />
+
+        <v-select
+          v-model="form.page_id"
+          :items="pages"
+          item-title="name"
+          item-value="id"
+          hide-details
+          density="compact"
+        />
         <v-card-actions>
           <v-btn
             color="blue"

@@ -1,43 +1,45 @@
-<script setup lang="ts">
-type SharedEditorT = {
-  label: string;
-  minHeight?: number;
-  content?: string;
-};
-//props
-const props = withDefaults(defineProps<SharedEditorT>(), {
-  minHeight: 350,
-  content: "",
-});
-
-//models
-const model = ref("");
-
-//emits
-const emits = defineEmits(["update:modelValue"]);
-
-//methods
-const updateContent = (payload: any) => emits("update:modelValue", payload);
-</script>
 <template>
   <div>
-    <label v-if="label">{{ props.label }}</label>
     <QuillEditor
-      v-model="model"
-      :style="{ height: `${minHeight}px` }"
-      contentType="html"
-      :content="props.content"
-      @update:content="updateContent"
+      :modules="modules"
+      :options="{ scrollingContainer: true }"
+      toolbar="full"
+      @update:content="onModelChange"
+      content-type="delta"
+      ref="Q"
     />
   </div>
 </template>
 
+<script setup lang="ts">
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import "@vueup/vue-quill/dist/vue-quill.bubble.css";
+import { QuillEditor } from "@vueup/vue-quill";
+
+type EditorT = {
+  content: String | null;
+};
+
+const modules = {
+  table: true,
+  tableUI: true,
+};
+const Q = ref();
+const emitters = defineEmits(["update:model-value"]);
+const props = defineProps<EditorT>();
+
+const onModelChange = (content: any) => {
+  emitters("update:model-value", Q.value.getHTML());
+};
+
+onMounted(() => {
+  if (props.content) {
+    Q.value.setHTML(props.content);
+  }
+});
+</script>
 <style>
-@import "@/assets/css/Editor.css";
-.v-messages__message {
-  border: 1px solid #ff9800 !important;
-  color: #ff9800 !important;
-  padding: 0.3rem;
-  margin-bottom: 0.5rem;
+.ql-editor {
+  height: 350px;
 }
 </style>

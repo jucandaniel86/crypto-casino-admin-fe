@@ -15,6 +15,17 @@ export const APP_BREADCRUMBS: BreadcrumbsInterface = {
       disabled: false,
     },
   ],
+  PLAYERS: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Players",
+      disabled: true,
+    },
+  ],
   GAMES: [
     {
       title: "Dashboard",
@@ -153,6 +164,56 @@ export const APP_BREADCRUMBS: BreadcrumbsInterface = {
     },
     {
       title: "Save Tag",
+      disabled: true,
+    },
+  ],
+  PROMOTIONS: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Casino",
+      disabled: true,
+    },
+    {
+      title: "Promotions",
+      disabled: true,
+    },
+  ],
+  PROMOTIONS_SAVE: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Casino",
+      disabled: true,
+    },
+    {
+      title: "Promotions",
+      disabled: false,
+      to: "/casino/promotions",
+    },
+    {
+      title: "Save Promotion",
+      disabled: true,
+    },
+  ],
+  MENUS: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Casino",
+      disabled: true,
+    },
+    {
+      title: "Menus",
       disabled: true,
     },
   ],

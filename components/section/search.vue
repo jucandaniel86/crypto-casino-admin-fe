@@ -16,24 +16,29 @@ const form = ref({
 
 const resolutionConfig = ref({
   LG: {
-    widthPercent: 0,
+    panelWidthPercent: 0,
     itemsPerRow: 0,
+    isVisible: 1,
   },
   XL: {
-    widthPercent: 0,
+    panelWidthPercent: 0,
     itemsPerRow: 0,
+    isVisible: 1,
   },
   MD: {
-    widthPercent: 0,
+    panelWidthPercent: 0,
     itemsPerRow: 0,
+    isVisible: 1,
   },
   SM: {
-    widthPercent: 0,
+    panelWidthPercent: 0,
     itemsPerRow: 0,
+    isVisible: 1,
   },
   XS: {
-    widthPercent: 0,
+    panelWidthPercent: 0,
     itemsPerRow: 0,
+    isVisible: 1,
   },
 });
 
@@ -69,7 +74,11 @@ watch(
 
 onMounted(() => {
   if (typeof props.item.data?.resolutionConfig !== "undefined") {
-    resolutionConfig.value = { ...props.item.data.resolutionConfig };
+    let resConfig = props.item.data.resolutionConfig;
+    if (typeof props.item.data.resolutionConfig === "string") {
+      resConfig = JSON.parse(props.item.data.resolutionConfig);
+    }
+    resolutionConfig.value = { ...resConfig };
   }
   if (props.item.data?.focusWidthPercent) {
     form.value.focusWidthPercent = props.item.data.focusWidthPercent;
@@ -124,10 +133,18 @@ onMounted(() => {
             density="compact"
           />
           <v-text-field
-            v-model="resolutionConfig.XL.widthPercent"
+            v-model="resolutionConfig.XL.panelWidthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
+          />
+          <v-checkbox
+            v-model="resolutionConfig.XL.isVisible"
+            label="Visible"
+            hide-details
+            density="compact"
+            :false-value="0"
+            :true-value="1"
           />
         </template>
         <template #LG>
@@ -138,10 +155,18 @@ onMounted(() => {
             density="compact"
           />
           <v-text-field
-            v-model="resolutionConfig.LG.widthPercent"
+            v-model="resolutionConfig.LG.panelWidthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
+          />
+          <v-checkbox
+            v-model="resolutionConfig.LG.isVisible"
+            label="Visible"
+            hide-details
+            density="compact"
+            :false-value="0"
+            :true-value="1"
           />
         </template>
         <template #MD>
@@ -152,10 +177,18 @@ onMounted(() => {
             density="compact"
           />
           <v-text-field
-            v-model="resolutionConfig.MD.widthPercent"
+            v-model="resolutionConfig.MD.panelWidthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
+          />
+          <v-checkbox
+            v-model="resolutionConfig.MD.isVisible"
+            label="Visible"
+            hide-details
+            density="compact"
+            :false-value="0"
+            :true-value="1"
           />
         </template>
         <template #SM>
@@ -166,10 +199,18 @@ onMounted(() => {
             density="compact"
           />
           <v-text-field
-            v-model="resolutionConfig.SM.widthPercent"
+            v-model="resolutionConfig.SM.panelWidthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
+          />
+          <v-checkbox
+            v-model="resolutionConfig.SM.isVisible"
+            label="Visible"
+            hide-details
+            density="compact"
+            :false-value="0"
+            :true-value="1"
           />
         </template>
         <template #XS>
@@ -180,10 +221,18 @@ onMounted(() => {
             density="compact"
           />
           <v-text-field
-            v-model="resolutionConfig.XS.widthPercent"
+            v-model="resolutionConfig.XS.panelWidthPercent"
             label="Panel width percent"
             hide-details
             density="compact"
+          />
+          <v-checkbox
+            v-model="resolutionConfig.XS.isVisible"
+            label="Visible"
+            hide-details
+            density="compact"
+            :false-value="0"
+            :true-value="1"
           />
         </template>
       </SharedResolutionConfig>

@@ -117,6 +117,7 @@ onMounted(() => {
         :server-items-length="totalItems"
         :loading="loading"
         :search="searchText"
+        :group-by="[{ key: 'pageName', order: 'asc' }]"
         class="elevation-1"
         :height="400"
         density="compact"

@@ -16,7 +16,7 @@ export const menuItems: MenuItemType[] = [
     label: "Players",
     id: "sidebarPlayers",
     icon: "ph-users",
-    link: "/",
+    link: "/players",
   },
   {
     label: "Casino",
@@ -34,9 +34,9 @@ export const menuItems: MenuItemType[] = [
       { label: "Tags", link: "/casino/tags", id: "casinoTags" },
       { label: "Providers", link: "/casino/providers", id: "casinoProviders" },
       {
-        label: "Default Settings",
-        link: "/casino/settings",
-        id: "casinoDefaultSettings",
+        label: "Promotions",
+        link: "/casino/promotions",
+        id: "casinoPromotions",
       },
       { label: "Casino Menu", link: "/casino/menu", id: "casinoMenu" },
     ],

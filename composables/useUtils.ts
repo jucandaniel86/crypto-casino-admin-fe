@@ -24,9 +24,25 @@ export const useUtils = () => {
     });
   }
 
+  const wait = (duration: number): Promise<void> =>
+    new Promise((resolve) => {
+      setTimeout(() => resolve(), duration);
+    });
+
+  const verifyNullObject = (obj: any, _keys: string[]) => {
+    return (
+      obj &&
+      obj !== "null" &&
+      obj !== "undefined" &&
+      Object.keys(obj).every((ob) => _keys.indexOf(ob) !== -1)
+    );
+  };
+
   return {
     removeDuplicates,
     findRecursive,
     flatten,
+    wait,
+    verifyNullObject,
   };
 };

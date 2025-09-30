@@ -15,9 +15,6 @@ const props = withDefaults(defineProps<CategoryListT>(), {
   multiselect: false,
 });
 
-//composables
-const { findRecursive } = useUtils();
-
 //models
 const search = ref("");
 const selected = ref<CategoryType>();

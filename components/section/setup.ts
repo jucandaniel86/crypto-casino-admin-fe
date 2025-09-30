@@ -1,5 +1,4 @@
 export enum ContainerSection {
-  BANNER = "BannerContainer",
   SLIDER = "SliderContainer",
   COLUMN = "ColumnContainer",
   GAMES_CATEGORY = "GamesCategoryContainer",
@@ -16,6 +15,9 @@ export enum ContainerSection {
   CATEGORY_HEADLESS = "GamesCategoryHeadlessContainer",
   ACCORDION = "AccordionContainer",
   BUTTON = "GenericButtonContainer",
+  PROMOTIONS = "PromotionsContainer",
+  BONUS = "HomepageBonusContainer",
+  OFFER = "HomepageOfferContainer",
 }
 
 export type ResolutionConfig = {
@@ -55,10 +57,6 @@ export type SelectedSectionsT = {
 };
 
 export const APP_SECTIONS: SelectedSectionsT[] = [
-  {
-    label: "Banner Container",
-    container: ContainerSection.BANNER,
-  },
   {
     label: "Slider Container",
     container: ContainerSection.SLIDER,
@@ -102,5 +100,17 @@ export const APP_SECTIONS: SelectedSectionsT[] = [
   {
     label: "Accordion Container",
     container: ContainerSection.ACCORDION,
+  },
+  {
+    label: "Promotions Container",
+    container: ContainerSection.PROMOTIONS,
+  },
+  {
+    label: "Homepage Bonus Container",
+    container: ContainerSection.BONUS,
+  },
+  {
+    label: "Homepage Offer Container",
+    container: ContainerSection.OFFER,
   },
 ];

@@ -27,7 +27,6 @@ const emits = defineEmits(["onAddNew", "reloadList"]);
 const handleAddNew = (section: any) => {
   emits("onAddNew", section);
   newSectionMenu.value = false;
-  console.log("===", props.sections.length - 1);
   //@ts-ignore
   SectionContainerRef.value.scrollToIndex(props.sections.length - 1);
 };
