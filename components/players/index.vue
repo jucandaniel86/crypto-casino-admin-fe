@@ -32,6 +32,10 @@ const reloadList = async () => {
 const formatDate = (date: string) => moment(date).fromNow();
 const activity = (userID: number) =>
   router.push({ name: "players-activity-id", params: { id: userID } });
+const wallets = (userID: number) =>
+  router.push({ name: "players-wallets-id", params: { id: userID } });
+const sessions = (userID: number) =>
+  router.push({ name: "players-sessions-id", params: { id: userID } });
 
 //watchers
 watch(
@@ -80,18 +84,44 @@ onMounted(() => {
       >
         <template v-slot:item="{ item }">
           <tr>
-            <td>{{ item.email }}</td>
+            <td>
+              {{ item.email }}
+              <v-chip size="x-small" class="d-flex"
+                >Created at: {{ formatDate(item.created_at) }}</v-chip
+              >
+            </td>
             <td>{{ item.username }}</td>
             <td>{{ item.fixed_id }}</td>
-            <td>{{ formatDate(item.created_at) }}</td>
-            <td>
+            <td width="40%">
               <v-btn
                 flat
                 variant="tonal"
                 color="blue"
                 @click.prevent="activity(item.id)"
                 size="small"
+                class="mr-1"
+                prepend-icon="mdi-chart-line"
                 >Activity</v-btn
+              >
+              <v-btn
+                flat
+                variant="tonal"
+                color="blue"
+                @click.prevent="wallets(item.id)"
+                size="small"
+                class="mr-1"
+                prepend-icon="mdi-wallet-outline"
+                >Wallets</v-btn
+              >
+
+              <v-btn
+                flat
+                variant="tonal"
+                color="blue"
+                @click.prevent="sessions(item.id)"
+                size="small"
+                prepend-icon="mdi-account-card-outline"
+                >Sessions</v-btn
               >
             </td>
           </tr>

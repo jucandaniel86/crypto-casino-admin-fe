@@ -217,4 +217,19 @@ export const APP_BREADCRUMBS: BreadcrumbsInterface = {
       disabled: true,
     },
   ],
+  WALLETS: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Settings",
+      disabled: true,
+    },
+    {
+      title: "Wallets",
+      disabled: true,
+    },
+  ],
 };

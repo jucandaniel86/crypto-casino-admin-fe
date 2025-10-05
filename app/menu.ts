@@ -43,9 +43,12 @@ export const menuItems: MenuItemType[] = [
   },
   {
     label: "Settings",
-    id: "sideBarClients",
+    id: "sidebarSettings",
     icon: "ph-gear-six",
     link: "/",
+    subMenu: [
+      { label: "Wallets", link: "/settings/wallets", id: "casinoWallets" },
+    ],
   },
   {
     label: "Admin Users",

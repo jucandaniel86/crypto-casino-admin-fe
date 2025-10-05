@@ -6,7 +6,7 @@ export const PLAYERS_TABLE_HEADERS: any[] = [
     align: "start",
     sortable: false,
     value: "name",
-    width: "20%",
+    width: "30%",
   },
   {
     title: "Username",
@@ -22,13 +22,6 @@ export const PLAYERS_TABLE_HEADERS: any[] = [
     value: "fixed_id",
     width: "20%",
   },
-  {
-    title: "Created at",
-    align: "start",
-    sortable: false,
-    value: "created_at",
-    width: "20%",
-  },
 
-  { title: "Actions", value: "iron", width: "10%" },
+  { title: "Actions", value: "iron", width: "40%" },
 ];
