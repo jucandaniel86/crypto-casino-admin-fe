@@ -9,6 +9,8 @@ const headers = ref([
   { title: "Game", value: "type", width: "10%" },
   { title: "Started Balance", value: "type", width: "10%" },
   { title: "Currency", value: "type", width: "10%" },
+  { title: "Real Money", value: "real_money", width: "10%" },
+  { title: "Demo", value: "demo", width: "10%" },
   { title: "IP Address", value: "ip_address", width: "15%" },
   { title: "User Agent", value: "user_agent", width: "20%" },
   { title: "Started at", value: "created_at" },
@@ -102,6 +104,20 @@ useHead({
                   <td class="text-sm">{{ item.start_balance }}</td>
                   <td class="text-sm">
                     {{ item.wallet ? item.wallet.currency : "N/A" }}
+                  </td>
+                  <td class="text-sm">
+                    <v-chip
+                      :color="item.demo ? 'orange' : 'green'"
+                      size="small"
+                      >{{ item.demo ? "NO" : "YES" }}</v-chip
+                    >
+                  </td>
+                  <td class="text-sm">
+                    <v-chip
+                      :color="!item.demo ? 'orange' : 'green'"
+                      size="small"
+                      >{{ !item.demo ? "NO" : "YES" }}</v-chip
+                    >
                   </td>
                   <td class="text-sm">{{ item.ip_address }}</td>
                   <td class="text-sm">

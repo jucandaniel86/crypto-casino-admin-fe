@@ -19,6 +19,12 @@ export const menuItems: MenuItemType[] = [
     link: "/players",
   },
   {
+    label: "Financiar",
+    id: "sidebarFinanciar",
+    icon: "ph-chart-line",
+    subMenu: [{ label: "Summary", link: "/summary", id: "casinoSummary" }],
+  },
+  {
     label: "Casino",
     icon: "ph-poker-chip",
     id: "sidebarCasino",

@@ -55,6 +55,18 @@ const save = async (payload: any) => {
   }
 };
 
+const createUserWallets = async () => {
+  const { success, data, error } = await useAPIFetch(
+    `/wallet/create-user-wallets`
+  );
+
+  if (success) {
+    useNuxtApp().$toast.success("Success");
+    dialog.value = false;
+    return;
+  }
+};
+
 const add = () => {
   dialog.value = true;
   currentItem.value = undefined;
@@ -89,6 +101,9 @@ onMounted(() => {
           @click.prevent="reloadList"
         />
       </div>
+      <v-btn prepend-icon="mdi-plus" @click.prevent="createUserWallets"
+        >Create missed wallets for users</v-btn
+      >
       <v-btn
         prepend-icon="mdi-plus"
         text="Add new wallet"

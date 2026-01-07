@@ -26,6 +26,21 @@ export const APP_BREADCRUMBS: BreadcrumbsInterface = {
       disabled: true,
     },
   ],
+  SUMMARY: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Financiar",
+      disabled: true,
+    },
+    {
+      title: "Summary",
+      disabled: true,
+    },
+  ],
   GAMES: [
     {
       title: "Dashboard",
