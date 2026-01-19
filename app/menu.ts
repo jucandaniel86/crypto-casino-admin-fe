@@ -19,10 +19,40 @@ export const menuItems: MenuItemType[] = [
     link: "/players",
   },
   {
+    label: "Risk & Fraud",
+    id: "sidebarRisk&Fraud",
+    icon: "ph-warning",
+    subMenu: [],
+    link: "/risk",
+  },
+  {
     label: "Financiar",
     id: "sidebarFinanciar",
     icon: "ph-chart-line",
-    subMenu: [{ label: "Summary", link: "/summary", id: "casinoSummary" }],
+    subMenu: [
+      {
+        label: "Finance OPS",
+        link: "/stats/finance-ops",
+        id: "statsFinanceOPS",
+      },
+      {
+        label: "Crypto OPS",
+        link: "/stats/crypto-ops",
+        id: "statsCryptoOPS",
+      },
+      { label: "Summary", link: "/summary", id: "casinoSummary" },
+      {
+        label: "Crypto Transactions",
+        link: "/stats/crypto-transactions",
+        id: "statsCryptoTransactions",
+      },
+      { label: "Games", link: "/stats/games", id: "statsGames" },
+      {
+        label: "Conversion Funnel",
+        link: "/stats/funnel",
+        id: "statsFunnel",
+      },
+    ],
   },
   {
     label: "Casino",

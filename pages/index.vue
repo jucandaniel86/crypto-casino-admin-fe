@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { APP_BREADCRUMBS } from "~/app/breadcrumbs";
-console.log("index page");
+useHead({
+  title: "Dashboard",
+});
 </script>
 
 <template>
   <SharedBreadcrumb :title="'Dashboard'" :items="APP_BREADCRUMBS.DASHBOARD" />
+  <Dashboard />
 </template>

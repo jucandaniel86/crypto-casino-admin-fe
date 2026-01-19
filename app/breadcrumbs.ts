@@ -247,4 +247,49 @@ export const APP_BREADCRUMBS: BreadcrumbsInterface = {
       disabled: true,
     },
   ],
+  STATS_GAMES: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Stats",
+      disabled: true,
+    },
+    {
+      title: "Games",
+      disabled: true,
+    },
+  ],
+  RISK_OVERVIEW: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Risk",
+      disabled: true,
+    },
+    {
+      title: "Overview",
+      disabled: true,
+    },
+  ],
+  RISK_SUSPICIOUS: [
+    {
+      title: "Dashboard",
+      disabled: false,
+      to: "/",
+    },
+    {
+      title: "Risk",
+      disabled: true,
+    },
+    {
+      title: "Suspicious Players",
+      disabled: true,
+    },
+  ],
 };
