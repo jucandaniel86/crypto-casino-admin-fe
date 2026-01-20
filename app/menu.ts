@@ -19,6 +19,13 @@ export const menuItems: MenuItemType[] = [
     link: "/players",
   },
   {
+    label: "Withdraw Requests",
+    id: "sidebarWithdrawRequests",
+    icon: "ph-wallet",
+    subMenu: [],
+    link: "/withdraw-requests",
+  },
+  {
     label: "Risk & Fraud",
     id: "sidebarRisk&Fraud",
     icon: "ph-warning",
