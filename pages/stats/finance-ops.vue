@@ -17,7 +17,7 @@ const { data, refresh, status } = await useApiUseFetch(
     to: to.value,
     currency_code: currency.value,
     unclaimed_days: unclaimedDays.value,
-  }))
+  })),
 );
 
 useHead({
@@ -26,7 +26,7 @@ useHead({
 </script>
 
 <template>
-  <v-container fluid class="pa-6">
+  <v-container fluid class="pa-0">
     <v-row class="align-center mb-4">
       <v-col cols="12" md="6">
         <div class="text-h5 font-weight-bold">Finance / Ops</div>

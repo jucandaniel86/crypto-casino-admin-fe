@@ -98,7 +98,7 @@ useHead({
 </script>
 
 <template>
-  <v-container fluid class="pa-6">
+  <v-container fluid class="pa-0">
     <v-card class="mb-4" color="white" variant="elevated">
       <v-card-text class="d-flex align-center justify-space-between">
         <div>

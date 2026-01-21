@@ -18,7 +18,7 @@ const {
     currency_code: currency.value,
     bets_10_threshold: 10,
     bets_100_threshold: 100,
-  }))
+  })),
 );
 
 useHead({
@@ -27,7 +27,7 @@ useHead({
 </script>
 
 <template>
-  <v-container fluid class="pa-6">
+  <v-container fluid class="pa-0">
     <v-row class="mb-4 align-center">
       <v-col cols="12" md="6">
         <div class="text-h5 font-weight-bold">Stats</div>
