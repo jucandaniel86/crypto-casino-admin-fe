@@ -55,6 +55,14 @@ function openDetails(row: Row) {
   dialog.value = true;
 }
 
+const statusColor = (value: string) => {
+  if (value === "approved") return "info";
+  if (value === "completed") return "success";
+  if (value === "rejected") return "error";
+  if (value === "failed") return "error";
+  return "warning";
+};
+
 async function approve() {
   if (!selected.value) return;
   await useApiPostFetch(`/withdraw-requests/${selected.value.uuid}/approve`, {
@@ -164,6 +172,12 @@ useHead({
           >
             {{ item.to_address }}
           </span>
+        </template>
+
+        <template #item.status="{ item }">
+          <v-chip size="small" :color="statusColor(item.status)" label>
+            {{ item.status }}
+          </v-chip>
         </template>
 
         <template #item.actions="{ item }">

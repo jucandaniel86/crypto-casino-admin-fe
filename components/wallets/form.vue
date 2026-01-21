@@ -22,6 +22,7 @@ const form = ref<WalletType>({
   active: 1,
   icon: "",
   wallet_uuid: "",
+  currency_id: "",
 });
 
 //emitters
@@ -67,6 +68,13 @@ onMounted(() => {
       <v-text-field
         v-model="form.code"
         label="Code"
+        required
+        density="compact"
+        hide-details
+      ></v-text-field>
+      <v-text-field
+        v-model="form.currency_id"
+        label="Internal Code"
         required
         density="compact"
         hide-details

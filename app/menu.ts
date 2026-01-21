@@ -33,6 +33,13 @@ export const menuItems: MenuItemType[] = [
     link: "/risk",
   },
   {
+    label: "Marketing",
+    id: "sidebarMarketing",
+    icon: "ph-image",
+    subMenu: [],
+    link: "/marketing",
+  },
+  {
     label: "Financiar",
     id: "sidebarFinanciar",
     icon: "ph-chart-line",
@@ -85,12 +92,18 @@ export const menuItems: MenuItemType[] = [
     ],
   },
   {
-    label: "Settings",
-    id: "sidebarSettings",
+    label: "System",
+    id: "siderbarSystem",
     icon: "ph-gear-six",
     link: "/",
     subMenu: [
-      { label: "Wallets", link: "/settings/wallets", id: "casinoWallets" },
+      {
+        label: "Dashboard Sweeps",
+        link: "/system/sweeps",
+        id: "systemFailedSweep",
+      },
+      { label: "Wallets", link: "/system/wallets", id: "systemWallets" },
+      { label: "Jobs Run", link: "/system/jobs-run", id: "systemJobsRun" },
     ],
   },
   {

@@ -11,4 +11,5 @@ export type WalletType = {
   active: number;
   wallet_uuid: string;
   icon: string;
+  currency_id: string;
 };
