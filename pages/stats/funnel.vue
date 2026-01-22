@@ -28,22 +28,23 @@ useHead({
 
 <template>
   <v-container fluid class="pa-0">
-    <v-row class="mb-4 align-center">
-      <v-col cols="12" md="6">
-        <div class="text-h5 font-weight-bold">Stats</div>
-        <div class="text-body-2 text-medium-emphasis">
-          Funnels & engagement.
+    <v-card class="mb-4" color="white" variant="elevated">
+      <v-card-text class="d-flex align-center justify-space-between">
+        <div class="w-50">
+          <div class="text-h5 font-weight-bold">Stats</div>
+          <div class="text-caption text-medium-emphasis">
+            Funnels & engagement.
+          </div>
         </div>
-      </v-col>
-
-      <v-col cols="12" md="6" class="d-flex justify-end ga-2">
-        <SelectCurrencies v-model="currency" style="max-width: 120px" />
-        <v-btn variant="outlined" @click="refresh">
-          <v-icon start icon="mdi-refresh" />
-          Refresh
-        </v-btn>
-      </v-col>
-    </v-row>
+        <div class="d-flex justify-end ga-2 w-50">
+          <SelectCurrencies v-model="currency" style="max-width: 140px" />
+          <v-btn variant="outlined" flat color="primary" @click="refresh">
+            <v-icon start icon="mdi-refresh" />
+            Refresh
+          </v-btn>
+        </div>
+      </v-card-text>
+    </v-card>
 
     <ConversionFunnelCard
       :data="funnel"

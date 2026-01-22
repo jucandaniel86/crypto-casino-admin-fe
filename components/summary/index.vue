@@ -69,7 +69,7 @@ watch(
   () => {
     reloadList();
   },
-  { deep: true }
+  { deep: true },
 );
 
 //onMounted
@@ -78,7 +78,21 @@ onMounted(() => {
 });
 </script>
 <template>
-  <v-col class="text-center">
+  <v-container fluid class="pa-0">
+    <v-card class="mb-4" color="white" variant="elevated">
+      <v-card-text class="d-flex align-center justify-space-between">
+        <div>
+          <div class="text-h5 font-weight-bold">Summary Report</div>
+          <div class="text-caption text-medium-emphasis">
+            Transactions & users & games & sessions
+          </div>
+        </div>
+        <v-btn variant="flat" color="primary" @click="reloadList">
+          <v-icon start icon="mdi-refresh" />
+          Refresh
+        </v-btn>
+      </v-card-text>
+    </v-card>
     <v-card min-height="600">
       <v-card-title class="d-flex justify-space-between">
         <h3 class="text-h6">Report</h3>
@@ -98,10 +112,10 @@ onMounted(() => {
           <template v-slot:top>
             <div class="pa-1">
               <v-row>
-                <v-col cols="10" md="6">
+                <v-col cols="10" md="7">
                   <SelectSearch @search:update="updateSearch" />
                 </v-col>
-                <v-col cols="10" md="4">
+                <v-col cols="10" md="5">
                   <SelectDatetimepicker v-model="period" />
                 </v-col>
                 <v-col cols="2">
@@ -252,7 +266,7 @@ onMounted(() => {
         </v-data-table>
       </v-card-text>
     </v-card>
-  </v-col>
+  </v-container>
 </template>
 <style scoped>
 .text-sm {
