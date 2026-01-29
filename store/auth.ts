@@ -18,6 +18,7 @@ type UserType = {
   env: EnvEnum;
   user_type: UserTypeEnum;
   site_id: string;
+  int_casino_id: string | null;
 };
 
 interface AuthStoreInterface {
@@ -44,7 +45,7 @@ export const useAuthStore = defineStore("auth-store", {
     async login(_payload: LoginPayload): Promise<useApiFetchType> {
       const { data, success, error }: any = await useApiPostFetch(
         "/login",
-        _payload
+        _payload,
       );
 
       if (success) {
@@ -58,7 +59,10 @@ export const useAuthStore = defineStore("auth-store", {
       };
     },
     async logout() {
+      const router = useRouter();
       await useApiPostFetch("/logout", {});
+
+      router.push("/login");
       this.authenticated = false;
       this.token = null;
       this.user = null;
@@ -66,9 +70,11 @@ export const useAuthStore = defineStore("auth-store", {
     async me(): Promise<useApiFetchType> {
       const { data, success, error }: any = await useAPIFetch("/user", {});
 
-      if (data) {
+      if (success && data?.user) {
         this.authenticated = true;
         this.user = data.user;
+      } else {
+        await this.logout();
       }
 
       return {

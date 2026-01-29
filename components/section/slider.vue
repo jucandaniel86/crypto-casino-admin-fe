@@ -83,11 +83,14 @@ const save = async () => {
   formData.append("is_same_tab", String(form.value.isSameTab));
   formData.append("no_follow", String(form.value.noFollow));
 
-  if (form.value.banner) {
-    //@ts-ignore
-    formData.append("banner", form.value.banner);
-  }
+  const bannerFile = Array.isArray(form.value.banner)
+    ? form.value.banner[0]
+    : form.value.banner;
 
+  if (bannerFile) {
+    formData.append("banner", bannerFile);
+  }
+  console.log(formData);
   const { data, error } = await useApiPostFetch("/sliders/save", formData);
   if (data) {
     alertSuccess(data.message);
@@ -106,7 +109,7 @@ const deleteItem = async (id: number) => {
       "/sliders/delete",
       {
         id,
-      }
+      },
     );
     if (success) {
       if (data.data.success) {
@@ -132,7 +135,7 @@ watch(
       sliders: slidersOptions.value,
     });
   },
-  { deep: true }
+  { deep: true },
 );
 
 //mounted
@@ -210,7 +213,7 @@ onMounted(async () => {
           ></v-select>
           <v-select
             v-if="form.actionType === ButtonActionTypesEnum.OPEN_INTERNAL_PAGE"
-            v-model="form.page_id"
+            v-model="form.page_id as any"
             label="Choose internal page"
             :items="pages"
             item-title="name"

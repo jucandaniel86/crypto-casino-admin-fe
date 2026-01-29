@@ -12,13 +12,14 @@ import {
 } from "@/app/config";
 import { watch } from "vue";
 import { useAuthStore } from "@/store/auth";
+import { storeToRefs } from "pinia";
 
 const state = useLayoutStore();
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
 const {
   public: { appName, version },
 } = useRuntimeConfig();
-const { user } = useAuthStore();
-
 const mobileNavigationDrawer = ref(false);
 const envDisabled = ref<boolean>(false);
 
@@ -52,8 +53,56 @@ const verticalDrawerWidth = computed(() => {
   return 250;
 });
 
+const selectedCasinoId = ref<string | null>(null);
+const isInitializingCasino = ref(true);
+const { alertSuccess } = useAlert();
+
+const setCasinoId = async (casinoId: string | null) => {
+  if (!casinoId) {
+    state.currentCasinoId = null;
+    return;
+  }
+
+  const { success: isSuccess } = await useAPIFetch("/users/change-casino", {
+    int_casino_id: casinoId,
+  });
+
+  if (isSuccess) {
+    state.currentCasinoId = casinoId;
+    alertSuccess("The casino was changed successfuly");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  }
+};
+
 watch(sideBarSize, () => {
   mobileNavigationDrawer.value = !mobileNavigationDrawer.value;
+});
+
+watch(
+  user,
+  (value) => {
+    if (!isInitializingCasino.value) {
+      return;
+    }
+
+    const defaultCasinoId =
+      state.currentCasinoId ?? value?.int_casino_id ?? null;
+
+    selectedCasinoId.value = defaultCasinoId;
+    state.currentCasinoId = defaultCasinoId;
+    isInitializingCasino.value = false;
+  },
+  { immediate: true },
+);
+
+watch(selectedCasinoId, async (value, previous) => {
+  if (isInitializingCasino.value || value === previous) {
+    return;
+  }
+
+  await setCasinoId(value);
 });
 </script>
 <template>
@@ -84,7 +133,9 @@ watch(sideBarSize, () => {
           <i class="ri-record-circle-line"></i>
         </v-btn>
       </div>
-
+      <v-card density="compact" rounded="0" class="ml-3 mr-3">
+        <SharedCasinos v-model="selectedCasinoId" :hide-details="true" />
+      </v-card>
       <div
         data-simplebar
         id="scrollbar"

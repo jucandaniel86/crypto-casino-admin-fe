@@ -1,5 +1,6 @@
 import { useLog, useLogError } from "./useLog";
 import { useAuthStore } from "~/store/auth";
+import { useLayoutStore } from "~/store/app";
 
 export type useAPIFetchType = {
   success: boolean;
@@ -10,9 +11,10 @@ export type useAPIFetchType = {
 export const useAPIFetch = async (
   path: any,
   _payload: any = {},
-  _blob: boolean = false
+  _blob: boolean = false,
 ): Promise<useAPIFetchType> => {
   const { token } = storeToRefs(useAuthStore());
+  const { currentCasinoId } = storeToRefs(useLayoutStore());
   const config = useRuntimeConfig();
   const options: any = {};
   let _return: useAPIFetchType = {
@@ -22,7 +24,10 @@ export const useAPIFetch = async (
   };
 
   options.baseURL = config.public.baseURL;
-  options.query = _payload;
+  options.query = {
+    int_casino_id: currentCasinoId.value,
+    ..._payload,
+  };
   //@ts-ignore
   options.onRequest = ({ request, options }) => {
     options.headers.set("Authorization", `Bearer ${token.value}`);
@@ -37,7 +42,7 @@ export const useAPIFetch = async (
       path: options.baseURL + path,
       params: _payload,
     },
-    true
+    true,
   );
 
   try {

@@ -1,5 +1,6 @@
 import { useAuthStore } from "~/store/auth";
 import { useLog, useLogError } from "./useLog";
+import { useLayoutStore } from "~/store/app";
 
 export type useApiFetchType = {
   success: boolean;
@@ -10,10 +11,12 @@ export type useApiFetchType = {
 export const useApiPostFetch = async (
   path: any,
   _payload: any = {},
-  files: boolean = false
+  files: boolean = false,
 ): Promise<useApiFetchType> => {
   const config = useRuntimeConfig();
   const { token } = storeToRefs(useAuthStore());
+  const { currentCasinoId } = storeToRefs(useLayoutStore());
+
   const options: any = {};
   let _return: useApiFetchType = {
     success: true,
@@ -22,10 +25,38 @@ export const useApiPostFetch = async (
   };
 
   options.baseURL = config.public.baseURL;
-  options.body = _payload;
   options.method = "post";
   options.watch = false;
   options.server = false;
+  const isFormData =
+    typeof FormData !== "undefined" && _payload instanceof FormData;
+
+  if (isFormData || files) {
+    const formData =
+      isFormData || typeof FormData === "undefined"
+        ? _payload
+        : new FormData();
+
+    if (!isFormData && formData && _payload && typeof _payload === "object") {
+      Object.entries(_payload).forEach(([key, value]) => {
+        formData.append(key, value as any);
+      });
+    }
+
+    if (
+      typeof currentCasinoId.value !== "undefined" &&
+      currentCasinoId.value !== null
+    ) {
+      formData.append("int_casino_id", String(currentCasinoId.value));
+    }
+
+    options.body = formData;
+  } else {
+    options.body = {
+      int_casino_id: currentCasinoId.value,
+      ..._payload,
+    };
+  }
 
   //@ts-ignore
   options.onRequest = ({ request, options }) => {
@@ -38,7 +69,7 @@ export const useApiPostFetch = async (
       path: options.baseURL + path,
       params: _payload,
     },
-    true
+    true,
   );
 
   try {

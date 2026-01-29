@@ -7,7 +7,6 @@ const router = useRouter();
 
 const logOut = async () => {
   await store.logout();
-  router.push("/login");
 };
 </script>
 <template>

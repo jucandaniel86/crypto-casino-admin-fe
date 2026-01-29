@@ -16,8 +16,22 @@ import { setAttributes } from "~/app/menu";
 
 const { VERTICAL } = LAYOUTS;
 
+type LayoutState = {
+  layoutType: string;
+  layoutTheme: string;
+  layoutWidth: string;
+  mode: string;
+  position: string;
+  topBarColor: string;
+  sideBarSize: string;
+  sideBarColor: string;
+  sideBarImage: string;
+  dir: string;
+  currentCasinoId: string | null;
+};
+
 export const useLayoutStore = defineStore("layout-store", {
-  state: (): { [key: string]: string } => ({
+  state: (): LayoutState => ({
     layoutType: VERTICAL,
     layoutTheme: LAYOUT_THEME.DEFAULT,
     layoutWidth: LAYOUT_WIDTH.FLUID,
@@ -28,6 +42,7 @@ export const useLayoutStore = defineStore("layout-store", {
     sideBarColor: SIDEBAR_COLOR.DARK,
     sideBarImage: "default",
     dir: DIR.LTR,
+    currentCasinoId: null,
   }),
   actions: {
     changeLayoutType(layoutType: string) {
