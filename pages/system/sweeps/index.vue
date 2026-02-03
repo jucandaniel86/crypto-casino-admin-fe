@@ -63,7 +63,7 @@ function openDetails(item: any) {
 async function fetchList() {
   loading.value = true;
   try {
-    const { data } = await useAPIFetch("/api/admin/crypto/sweeps", {
+    const { data } = await useAPIFetch("/crypto/sweeps", {
       currency_code: currency.value,
       status: status.value ?? undefined,
       from: period.value[0],
@@ -86,7 +86,7 @@ watch(
     page.value = 1;
     fetchList();
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 );
 </script>
 

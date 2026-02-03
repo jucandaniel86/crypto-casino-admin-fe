@@ -29,7 +29,15 @@ const props = defineProps<{
   stats: TodayStatsPayload;
   range?: { from?: string | Date; to?: string | Date };
   currency?: string;
+  loading?: boolean;
 }>();
+
+const emit = defineEmits<{
+  (event: "date-change", value: string): void;
+}>();
+
+const dateMenu = ref(false);
+const selectedDate = ref<Date | null>(null);
 
 const formatNumber = (value: number | string | undefined) => {
   if (value === null || value === undefined || value === "") return "-";
@@ -40,7 +48,7 @@ const formatNumber = (value: number | string | undefined) => {
 };
 
 const formatMoney = (
-  value?: number | string | { amount?: number | string; currency?: string }
+  value?: number | string | { amount?: number | string; currency?: string },
 ) => {
   if (value === null || value === undefined || value === "") return "-";
   if (typeof value === "object") {
@@ -59,31 +67,81 @@ const formatDate = (value?: string) => {
   return date.toLocaleString();
 };
 
+const formatRangeDate = (value: string | Date) => {
+  if (value instanceof Date) return value.toLocaleDateString();
+  const parsed = moment(value);
+  return parsed.isValid() ? parsed.format("LL") : String(value);
+};
+
+const normalizeDate = (value: string | Date) => {
+  const parsed = moment(value);
+  if (!parsed.isValid()) return null;
+  return parsed.toDate();
+};
+
 const rangeLabel = computed(() => {
-  if (!props.range?.from || !props.range?.to) return "Today";
-  const { from, to } = props.range;
-  const fromLabel =
-    from instanceof Date
-      ? from.toLocaleDateString()
-      : moment(from).format("LL");
-  const toLabel =
-    to instanceof Date ? to.toLocaleDateString() : moment(to).format("LL");
+  const fromValue = props.range?.from ?? selectedDate.value;
+  const toValue = props.range?.to ?? selectedDate.value;
+  if (!fromValue || !toValue) return "Today";
+  const fromLabel = formatRangeDate(fromValue);
+  const toLabel = formatRangeDate(toValue);
+  if (fromLabel === toLabel) return fromLabel;
   return `${fromLabel} - ${toLabel}`;
 });
 
 const biggestWin = computed(() => props.stats.biggest_win_today || {});
+
+watch(
+  () => props.range?.from,
+  (value) => {
+    if (!value) return;
+    selectedDate.value = normalizeDate(value);
+  },
+  { immediate: true },
+);
+
+const handleDateChange = (value: Date | null) => {
+  if (!value) return;
+  selectedDate.value = value;
+  dateMenu.value = false;
+  emit("date-change", moment(value).format("YYYY-MM-DD"));
+};
 </script>
 
 <template>
   <v-card>
     <v-card-title class="d-flex align-center justify-space-between">
-      <div class="text-h6">Today Stats</div>
-      <v-chip size="small" color="indigo" variant="tonal">
-        {{ rangeLabel }}
-      </v-chip>
+      <div class="text-h6">Stats</div>
+      <div class="d-flex flex-column align-end ga-1">
+        <v-chip
+          size="small"
+          color="indigo"
+          variant="tonal"
+          class="cursor-pointer"
+          @click="dateMenu = true"
+        >
+          {{ rangeLabel }}
+        </v-chip>
+        <v-dialog v-model="dateMenu" width="auto">
+          <v-card>
+            <v-card-text class="pa-0">
+              <v-date-picker
+                v-model="selectedDate"
+                :max="new Date()"
+                color="indigo"
+                @update:modelValue="handleDateChange"
+              />
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+        <div class="text-caption text-medium-emphasis">
+          Click the date to change the range
+        </div>
+      </div>
     </v-card-title>
 
     <v-card-text>
+      <v-progress-linear v-if="loading" indeterminate class="mb-4" />
       <v-row dense class="flex-wrap">
         <v-col cols="12" sm="6" md="4" lg="3">
           <v-sheet class="pa-4" rounded border>

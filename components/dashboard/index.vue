@@ -1,5 +1,6 @@
 <script setup lang="ts">
 //components
+import moment from "moment";
 import TodayStats from "./TodayStats.vue";
 import TopGamesComponent, { type TopGameItem } from "./TopGames.vue";
 import TreasuryDistributionPie from "./TreasuryDistributionPie.vue";
@@ -11,6 +12,8 @@ const treasuryPieError = ref<string>("");
 const statsData = ref<any>();
 const loading = ref<boolean>(false);
 const topGames = ref<TopGameItem[]>([]);
+const selectedDate = ref<string | null>(null);
+const todayStatsLoading = ref<boolean>(false);
 
 //methods
 const getTreasuryPie = async (): Promise<void> => {
@@ -29,14 +32,28 @@ const getTreasuryPie = async (): Promise<void> => {
 };
 
 const getTodayStats = async (): Promise<void> => {
-  const { data } = await useAPIFetch("/stats/today", {
+  todayStatsLoading.value = true;
+  const query: Record<string, string> = {
     currency_id: currency.value,
     currency_code: currency.value,
-  });
+  };
+
+  if (selectedDate.value) {
+    query.from = moment(selectedDate.value)
+      .startOf("day")
+      .format("YYYY-MM-DD HH:mm:ss");
+    query.to = moment(selectedDate.value)
+      .add(1, "day")
+      .startOf("day")
+      .format("YYYY-MM-DD HH:mm:ss");
+  }
+
+  const { data } = await useAPIFetch("/stats/today", query);
 
   if (data) {
     statsData.value = data;
   }
+  todayStatsLoading.value = false;
 };
 
 const getTopGames = async (): Promise<void> => {
@@ -52,6 +69,11 @@ const initDashboard = async (): Promise<void> => {
   loading.value = true;
   await Promise.all([getTreasuryPie(), getTodayStats(), getTopGames()]);
   loading.value = false;
+};
+
+const handleTodayStatsDateChange = async (value: string) => {
+  selectedDate.value = value;
+  await getTodayStats();
 };
 
 //watch
@@ -96,6 +118,8 @@ onMounted(() => {
               :stats="statsData.kpi"
               :range="statsData.range"
               :currency="currency"
+              :loading="todayStatsLoading"
+              @date-change="handleTodayStatsDateChange"
             />
           </v-col>
         </v-row>
