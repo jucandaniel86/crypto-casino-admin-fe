@@ -8,7 +8,7 @@ const deltaNeg = computed(() => Number(props.data.mismatch.delta_base) < 0);
   <v-row dense>
     <!-- 16) Mismatch -->
     <v-col cols="12" md="4">
-      <v-card variant="outlined">
+      <v-card>
         <v-card-title class="d-flex justify-space-between">
           Ledger vs On-chain
           <v-chip
@@ -23,13 +23,11 @@ const deltaNeg = computed(() => Number(props.data.mismatch.delta_base) < 0);
         <v-card-text class="d-flex flex-column ga-2">
           <div>
             Treasury on-chain:
-            <Money
-              :ui="
-                props.data.mismatch.treasury_onchain_base /
-                10 ** props.data.mismatch.decimals
-              "
+
+            <SharedMoney
+              :ui="props.data.mismatch.treasury_onchain_ui"
               :base="props.data.mismatch.treasury_onchain_base"
-              :decimals="props.data.mismatch.decimals"
+              :decimals="props.data.decimals"
               currency="PEP"
               :precision="2"
             />
@@ -37,13 +35,10 @@ const deltaNeg = computed(() => Number(props.data.mismatch.delta_base) < 0);
 
           <div>
             Ledger liabilities:
-            <Money
-              :ui="
-                props.data.mismatch.ledger_liabilities_base /
-                10 ** props.data.mismatch.decimals
-              "
+            <SharedMoney
+              :ui="props.data.mismatch.ledger_liabilities_ui"
               :base="props.data.mismatch.ledger_liabilities_base"
-              :decimals="props.data.mismatch.decimals"
+              :decimals="props.data.decimals"
               currency="PEP"
               :precision="2"
             />
@@ -51,13 +46,11 @@ const deltaNeg = computed(() => Number(props.data.mismatch.delta_base) < 0);
 
           <div class="font-weight-bold">
             Delta:
-            <Money
-              :ui="
-                props.data.mismatch.delta_base /
-                10 ** props.data.mismatch.decimals
-              "
+
+            <SharedMoney
+              :ui="props.data.mismatch.delta_ui"
               :base="props.data.mismatch.delta_base"
-              :decimals="props.data.mismatch.decimals"
+              :decimals="props.data.decimals"
               currency="PEP"
               :precision="2"
               colored
@@ -78,7 +71,7 @@ const deltaNeg = computed(() => Number(props.data.mismatch.delta_base) < 0);
 
     <!-- 17) Deposit latency -->
     <v-col cols="12" md="4">
-      <v-card variant="outlined">
+      <v-card>
         <v-card-title>Deposit latency</v-card-title>
         <v-card-text>
           <v-list density="compact">
@@ -104,20 +97,26 @@ const deltaNeg = computed(() => Number(props.data.mismatch.delta_base) < 0);
 
     <!-- 18) Fees -->
     <v-col cols="12" md="4">
-      <v-card variant="outlined">
+      <v-card>
         <v-card-title>Fees (SOL)</v-card-title>
         <v-card-text class="d-flex flex-column ga-2">
           <div>
             Withdraw fees:
-            <Money :ui="props.data.fees.withdraw_fee_sol" :precision="6" />
+            <SharedMoney
+              :ui="props.data.fees.withdraw_fee_sol"
+              :precision="6"
+            />
           </div>
           <div>
             Sweep fees:
-            <Money :ui="props.data.fees.sweep_fee_sol" :precision="6" />
+            <SharedMoney :ui="props.data.fees.sweep_fee_sol" :precision="6" />
           </div>
           <div class="font-weight-bold">
             Cost / withdraw:
-            <Money :ui="props.data.fees.cost_per_withdraw_sol" :precision="6" />
+            <SharedMoney
+              :ui="props.data.fees.cost_per_withdraw_sol"
+              :precision="6"
+            />
           </div>
         </v-card-text>
       </v-card>

@@ -138,7 +138,7 @@ watch(
       >
         <template #item.amount="{ item }">
           <div class="text-no-wrap">
-            {{ fmt(item.amount) }} {{ symFromCurrency(item.currency) }}
+            {{ fmt(item.amount_base) }} {{ symFromCurrency(item.currency) }}
           </div>
         </template>
 

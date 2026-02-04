@@ -42,10 +42,6 @@ useHead({
       color="primary"
     />
 
-    <v-card variant="elevated" color="blue-grey-lighten-5">
-      <v-card-text>
-        <CryptoOpsOverview v-if="data" :data="data" />
-      </v-card-text>
-    </v-card>
+    <CryptoOpsOverview v-if="data" :data="data" />
   </v-container>
 </template>

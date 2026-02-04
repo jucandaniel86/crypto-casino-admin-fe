@@ -7,7 +7,7 @@ type Row = {
   uuid: string;
   currency: string;
   amount: string;
-  type: "deposit" | "withdraw" | "game_win" | "game_bet";
+  type: "deposit" | "withdraw" | "sweep" | "game_win" | "game_bet";
   status: "pending" | "confirmed" | "failed";
   txid: string | null;
   to_address: string | null;
@@ -87,6 +87,7 @@ const statusColor = (value: Row["status"]) => {
 const typeColorMap: Record<Row["type"], string> = {
   deposit: "#16a34a",
   withdraw: "#f97316",
+  sweep: "#0ea5e9",
   game_win: "#2563eb",
   game_bet: "#7c3aed",
 };
@@ -128,6 +129,9 @@ const formatDate = (value: string) => moment(value).format("LLL");
                 { title: 'All', value: null },
                 { title: 'Deposit', value: 'deposit' },
                 { title: 'Withdraw', value: 'withdraw' },
+                { title: 'Sweep', value: 'sweep' },
+                { title: 'Game win', value: 'game_win' },
+                { title: 'Game bet', value: 'game_bet' },
               ]"
               item-title="title"
               item-value="value"
