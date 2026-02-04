@@ -72,7 +72,7 @@ async function fetchList() {
       per_page: perPage.value,
     });
 
-    const res: any = data.value?.result;
+    const res: any = data.result;
     items.value = res?.data ?? [];
     total.value = res?.total ?? 0;
   } finally {
