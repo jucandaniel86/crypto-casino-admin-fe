@@ -100,7 +100,7 @@ watch(
 
     <SweepsMetricsCard :currency="currency" :period="period" @open="openList" />
 
-    <v-card rounded="xl" class="pa-4">
+    <v-card class="pa-4">
       <div class="d-flex align-center justify-space-between">
         <div class="text-subtitle-1 font-weight-medium">Sweeps list</div>
 

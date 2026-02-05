@@ -43,7 +43,7 @@ watch(
   () => {
     reloadList();
   },
-  { deep: true }
+  { deep: true },
 );
 
 watch(searchText, () => {
@@ -59,74 +59,90 @@ onMounted(() => {
 });
 </script>
 <template>
-  <v-card>
-    <v-card-title class="d-flex justify-space-between align-center ga-2">
-      <v-text-field
-        v-model="searchText"
-        label="Search"
-        chips
-        hide-details
-        density="compact"
-      ></v-text-field>
-    </v-card-title>
-    <v-card-text>
-      <v-data-table
-        :headers="PLAYERS_TABLE_HEADERS"
-        :items="items"
-        :options.sync="options"
-        :server-items-length="totalItems"
-        :loading="loading"
-        :search="searchText"
-        class="elevation-1"
-        :height="400"
-        density="compact"
-        fixed-header
-      >
-        <template v-slot:item="{ item }">
-          <tr>
-            <td>
-              {{ item.email }}
-              <v-chip size="x-small" class="d-flex"
-                >Created at: {{ formatDate(item.created_at) }}</v-chip
-              >
-            </td>
-            <td>{{ item.username }}</td>
-            <td>{{ item.fixed_id }}</td>
-            <td width="40%">
-              <v-btn
-                flat
-                variant="tonal"
-                color="blue"
-                @click.prevent="activity(item.id)"
-                size="small"
-                class="mr-1"
-                prepend-icon="mdi-chart-line"
-                >Activity</v-btn
-              >
-              <v-btn
-                flat
-                variant="tonal"
-                color="blue"
-                @click.prevent="wallets(item.id)"
-                size="small"
-                class="mr-1"
-                prepend-icon="mdi-wallet-outline"
-                >Wallets</v-btn
-              >
+  <v-container fluid class="pa-0">
+    <v-card class="mb-4" color="white" variant="elevated">
+      <v-card-text class="d-flex align-center justify-space-between">
+        <div>
+          <div class="text-h5 font-weight-bold">Players</div>
+          <div class="text-caption text-medium-emphasis">
+            Manage your platform players here.
+          </div>
+        </div>
+        <v-btn variant="flat" color="primary" @click="reloadList">
+          <v-icon start icon="mdi-refresh" /> Refresh
+        </v-btn>
+      </v-card-text>
+    </v-card>
 
-              <v-btn
-                flat
-                variant="tonal"
-                color="blue"
-                @click.prevent="sessions(item.id)"
-                size="small"
-                prepend-icon="mdi-account-card-outline"
-                >Sessions</v-btn
-              >
-            </td>
-          </tr>
-        </template>
-      </v-data-table>
-    </v-card-text>
-  </v-card>
+    <v-card>
+      <v-card-title class="d-flex justify-space-between align-center ga-2">
+        <v-text-field
+          v-model="searchText"
+          label="Search"
+          chips
+          hide-details
+          density="compact"
+        ></v-text-field>
+      </v-card-title>
+      <v-card-text>
+        <v-data-table
+          :headers="PLAYERS_TABLE_HEADERS"
+          :items="items"
+          :options.sync="options"
+          :server-items-length="totalItems"
+          :loading="loading"
+          :search="searchText"
+          class="elevation-1"
+          :height="400"
+          density="compact"
+          fixed-header
+        >
+          <template v-slot:item="{ item }">
+            <tr>
+              <td>
+                {{ item.email }}
+                <v-chip size="x-small" class="d-flex"
+                  >Created at: {{ formatDate(item.created_at) }}</v-chip
+                >
+              </td>
+              <td>{{ item.username }}</td>
+              <td>{{ item.fixed_id }}</td>
+              <td width="40%">
+                <v-btn
+                  flat
+                  variant="tonal"
+                  color="blue"
+                  @click.prevent="activity(item.id)"
+                  size="small"
+                  class="mr-1"
+                  prepend-icon="mdi-chart-line"
+                  >Activity</v-btn
+                >
+                <v-btn
+                  flat
+                  variant="tonal"
+                  color="blue"
+                  @click.prevent="wallets(item.id)"
+                  size="small"
+                  class="mr-1"
+                  prepend-icon="mdi-wallet-outline"
+                  >Wallets</v-btn
+                >
+
+                <v-btn
+                  flat
+                  variant="tonal"
+                  color="blue"
+                  @click.prevent="sessions(item.id)"
+                  size="small"
+                  prepend-icon="mdi-account-card-outline"
+                  >Sessions</v-btn
+                >
+              </td>
+            </tr>
+          </template>
+        </v-data-table>
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>

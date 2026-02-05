@@ -18,7 +18,7 @@ const pendingLoading = ref(false);
 const periodLabel = computed(() => {
   const [from, to] = props.period;
   return `${new Date(from).toLocaleDateString()} → ${new Date(
-    to
+    to,
   ).toLocaleDateString()}`;
 });
 
@@ -36,7 +36,7 @@ async function refresh() {
       to: props.period[1],
     });
 
-    const res: any = data.value?.result;
+    const res: any = data?.result;
     metrics.value = res.metrics;
     symbol.value = res.filters.currency_symbol;
   } finally {
@@ -51,7 +51,7 @@ watch(() => [props.currency, props.period], refresh, {
 </script>
 
 <template>
-  <v-card rounded="xl" class="pa-4">
+  <v-card class="pa-4">
     <div class="d-flex align-center justify-space-between">
       <div>
         <div class="text-subtitle-1 font-weight-medium">Sweeps</div>
